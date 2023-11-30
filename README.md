@@ -16,7 +16,7 @@ And you are ready to start coding!
 To run any file, use this pattern:
 
 ```bash
-bun run test {day} {part} {sample}
+bun run check:exercise {day} {part} {sample}
 ```
 
 **day**: represent a number between `1` and `25` (folder structure).

@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "generate": "bun run generate.ts",
-    "test": "bun run index.ts"
+    "check:exercise": "bun run index.ts"
   },
   "devDependencies": {
     "bun-types": "latest"
