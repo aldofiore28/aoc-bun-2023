@@ -24,8 +24,10 @@ for (let i = 1; i <= 25; i++) {
 `// input contains the content of the input file
 // you choose to use
 export default function (input: string) {
+  console.log('input:', input)
+  console.log('                         ')
   // your code goes here
-  console.log('result: ', undefined)
+  console.log('result:', undefined)
 }`;
 
   if (!fs.existsSync(path.join(folderName, fileNames.a))) {
