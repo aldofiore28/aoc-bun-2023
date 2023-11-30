@@ -7,8 +7,16 @@ const inputFilePath = `./day-${day}/day-${day}-${isSample ? "sample-" : `${part}
 
 const fileContent = await Bun.file(inputFilePath).text();
 
-import(filePath).then((module) => {
-  if (typeof module.default === "function") {
-    module.default(fileContent);
-  }
-});
+let module;
+
+try {
+  module = await import(filePath);
+} catch (error) {
+  console.error(error);
+}
+
+if (typeof module.default === "function") {
+  module.default(fileContent);
+} else {
+  throw new Error("Default export function not found.")
+}
