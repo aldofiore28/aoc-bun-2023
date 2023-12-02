@@ -1,8 +1,7 @@
 // input contains the content of the input file
 // you choose to use
 export default function (input: string) {
-  console.log("input:", input);
-  console.log("                         ");
+  console.log("input:", `${input}\n`);
 
   const MAX: Record<string, number> = {
     red: 12,
@@ -23,9 +22,9 @@ export default function (input: string) {
         .map((cubesPulled) =>
           cubesPulled.split(",").reduce((isPossible, cubesPulledPerColor) => {
             const amount = cubesPulledPerColor.match(/\d+/)?.at(0);
-            const colorName = cubesPulledPerColor.substring(amount?.length || 0);
+            const color = cubesPulledPerColor.substring(amount?.length || 0);
 
-            return isPossible && parseInt(amount || "0") <= MAX[colorName];
+            return isPossible && parseInt(amount || "0") <= MAX[color];
           }, true)
         )
     )

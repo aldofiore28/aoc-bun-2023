@@ -1,8 +1,7 @@
 // input contains the content of the input file
 // you choose to use
 export default function (input: string) {
-  console.log("input:", input);
-  console.log("                         ");
+  console.log("input:", `${input}\n`);
 
   const sequences = input.split("\n");
 

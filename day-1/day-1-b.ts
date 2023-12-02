@@ -1,8 +1,7 @@
 // input contains the content of the input file
 // you choose to use
 export default function (input: string) {
-  console.log("input:", input);
-  console.log("                         ");
+  console.log("input:", `${input}\n`);
 
   const sequences = input.split("\n");
 
@@ -55,7 +54,10 @@ export default function (input: string) {
       }
 
       Object.keys(numbersInDigitToNumberMap).forEach((wordNumber) => {
-        const possibleNumberWord = sequence.substring(i - wordNumber.length + 1, i + 1);
+        const possibleNumberWord = sequence.substring(
+          i - wordNumber.length + 1,
+          i + 1
+        );
 
         if (possibleNumberWord === wordNumber) {
           secondNumber = numbersInDigitToNumberMap[wordNumber];

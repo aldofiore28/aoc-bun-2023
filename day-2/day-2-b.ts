@@ -1,8 +1,7 @@
 // input contains the content of the input file
 // you choose to use
 export default function (input: string) {
-  console.log("input:", input);
-  console.log("                         ");
+  console.log("input:", `${input}\n`);
 
   const getDigitRegex = /\d+/;
 
@@ -18,17 +17,13 @@ export default function (input: string) {
           cubesPulled.split(",").reduce(
             (power, cubesPulledPerColor) => {
               const amount = cubesPulledPerColor.match(getDigitRegex)?.at(0);
-              const colorName = cubesPulledPerColor.substring(
-                amount?.length || 0
-              );
+              const color = cubesPulledPerColor.substring(amount?.length || 0);
               const amountNumber = parseInt(amount || "0");
 
               return {
                 ...power,
-                [colorName]:
-                  amountNumber > power[colorName]
-                    ? amountNumber
-                    : power[colorName],
+                [color]:
+                  amountNumber > power[color] ? amountNumber : power[color],
               };
             },
             { red: 0, green: 0, blue: 0 } as Record<string, number>
