@@ -1,8 +1,11 @@
 // input contains the content of the input file
 // you choose to use
 export default function (input: string) {
-  console.log('input:', input)
-  console.log('                         ')
+  console.log("input:", `${input}\n`);
+
+  let result;
+
   // your code goes here
-  console.log('result:', undefined)
+
+  console.log("result:", result)
 }
