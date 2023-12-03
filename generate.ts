@@ -24,7 +24,7 @@ for (let i = 1; i <= 25; i++) {
 `// input contains the content of the input file
 // you choose to use
 export default function (input: string) {
-  console.log("input:", \`\${input}\\n\`);
+  console.log("input:\\n", \`\${input}\\n\`);
 
   let result;
 
