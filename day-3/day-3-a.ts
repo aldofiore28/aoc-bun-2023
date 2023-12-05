@@ -10,8 +10,6 @@ export default function (input: string) {
 
   const engineParts = input.split("\n");
 
-  const sanitiseArrayLength = (length: number) => (length < 0 ? 0 : length);
-
   for (let i = 0; i < engineParts.length; i++) {
     const singleParts = engineParts[i].split("");
 
@@ -19,7 +17,9 @@ export default function (input: string) {
     let tempNumber = "";
 
     for (let j = 0; j < singleParts.length; j++) {
-      const isArrayEnd = j === singleParts.length - 1;
+      const isNumberAtArrayStart = numberStart === 0;
+      const isNumberAtArrayEnd = numberStart === singleParts.length - 1;
+
       if (symbolsRegex.test(singleParts[j]) && !tempNumber) {
         continue;
       }
@@ -28,14 +28,14 @@ export default function (input: string) {
       if (!isNaN(Number(singleParts[j]))) {
         // if it's a number and it's the first number we encountered
         // save the initial index to know where the number starts
-        if (!numberStart === undefined) {
+        if (numberStart === undefined) {
           numberStart = j;
         }
 
         // save the stringified number
         tempNumber = `${tempNumber}${singleParts[j]}`;
-        // start again
-        if (!isArrayEnd) {
+
+        if (!isNumberAtArrayEnd && j !== singleParts.length - 1) {
           continue;
         }
       }
@@ -46,8 +46,8 @@ export default function (input: string) {
         engineParts[i - 1]
           ?.split("")
           .slice(
-            sanitiseArrayLength(j - tempNumber.length - (isArrayEnd ? 0 : 1)),
-            j + 1
+            isNumberAtArrayStart ? 0 : (numberStart as number) - 1,
+            isNumberAtArrayEnd ? j : j + 1
           )
           .join("") || "";
 
@@ -56,26 +56,19 @@ export default function (input: string) {
         engineParts[i + 1]
           ?.split("")
           .slice(
-            sanitiseArrayLength(j - tempNumber.length - (isArrayEnd ? 0 : 1)),
-            j + 1
+            isNumberAtArrayStart ? 0 : (numberStart as number) - 1,
+            isNumberAtArrayEnd ? j : j + 1
           )
           .join("") || "";
 
       // left
-      const left =
-        singleParts[j - tempNumber.length - (isArrayEnd ? 0 : 1)] || "";
+      const left = isNumberAtArrayStart ? "" : singleParts[(numberStart as number) - 1];
 
       // right
-      const right = isArrayEnd ? "" : singleParts[j];
+      const right = isNumberAtArrayEnd ? "" : singleParts[j];
 
-      console.log(tempNumber);
       const allParts = `${top}${right}${bottom}${left}`;
-      console.log(`
-${top}
-${left}${tempNumber}${right}
-${bottom}`);
       const hasSymbol = symbolExceptDotRegex.test(allParts);
-      console.log("🚀 ~ file: day-3-a.ts:74 ~ hasSymbol:", hasSymbol);
 
       if (hasSymbol) {
         result += Number(tempNumber);
